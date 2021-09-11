@@ -5,6 +5,8 @@
 //  Created by Lee's Pc on 2021/09/04.
 //
 
+
+//Day 1
 import Foundation
 
 print("Hello, World!")
@@ -71,4 +73,56 @@ print(set1.update(with: 1))   // Optioanl(1)
 print(set1)
 print(set1.update(with: 120))        // nil
 print(set1)
+
+//Day 2
+
+func sayHello(name: String)
+{
+    print("Check #2 \(name)")
+}
+ 
+var name: String = "Kyusok"
+sayHello(name: name)
+name = "LeeKyusok"
+print("Check #1 \(name)")
+
+func sayHello2(name1: inout String) {
+    name1 = "Kyumaker"
+}
+ 
+var name2: String = "LeeKyusok"
+sayHello2(name1: &name2)
+print(name2)
+
+//가변 파라미터
+func printSum(of nums: Int...) {}
+printSum(of: 1, 2, 3, 4)
+
+//파라미터가 있는 함수의 표기법 (Parameter Exists)
+func toYou(name: String) {}
+toYou(name:"LeeKS")
+func toYou1(_ name: String) {}
+toYou1(_ : "Hello")
+func toYou2(to name: String) {}
+toYou2(to: "Good")
+
+//파라미터가 없는 함수의 표기법 (No Parameter)
+func toYou3() {}
+toYou3()
+
+//함수를 상수에 대입
+func funcDainyuu(name: String) {
+    print("\(name)")
+}
+func funcDainyuu(_ name: String) {
+    print("\(name)")
+}
+let f = funcDainyuu(name:)
+f("Lee")
+
+
+
+
+//Day 3
+
 
