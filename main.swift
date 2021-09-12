@@ -120,9 +120,103 @@ func funcDainyuu(_ name: String) {
 let f = funcDainyuu(name:)
 f("Lee")
 
-
-
-
 //Day 3
+
+//함수의 파라미터로 함수를 전달할 수 있다.
+//Possbile to send Functions to Parameters of the Function
+func doSomething(_ callback: (String) -> ()) {
+    callback("Kyusok")
+    callback("KyusokLee")
+    callback("LeeKyusok")
+}
+ 
+doSomething {message in
+    print("Success!" + message)
+}
+
+let closure = { () -> () in
+    print("Closure")
+}
+
+func doSomething1(closure: () -> ()) {
+    closure()
+}
+
+doSomething1(closure: { () -> () in
+    print("Hello!")
+})
+
+//함수의 반환타입으로 클로저를 사용할 수 있다.
+//Closure can be used as the Return Type of the Function.
+func doSomething() -> () -> () {
+    
+    return { () -> () in
+        print("Hello LeeKyusok!")
+    }
+}
+
+let closure2 = doSomething()
+closure2()
+
+//변수나 상수에 대입없이 클로저를 직접 실행하는 방법
+//Way to execute a Closure without substituting a Variable or a Constant.
+({ () -> () in
+    print("Hello 李!")
+})()
+
+//Trailing Closure (클로저 문법 경량화 Simplify the Closure grammar)
+//First, Write an inline Closure
+func doSomething2(closure: () -> ()) {
+    closure()
+}
+
+doSomething2(closure: { () -> () in
+    print("Hello! World!")
+})
+
+//Second, Write Trailing Closure of above one (Simplified Closure grammar)
+doSomething2() { () -> () in
+    print("Hello! World!")
+}
+
+//파라미터가 여러 개인 함수일 경우
+//The case of a function which has multiple parameters
+func fetchData(success: () -> (), fail: () -> ()) {
+    success()
+    fail()
+}
+
+//First, write an inline Closure
+fetchData(success: { () -> () in
+    print("Success!")
+}, fail: { () -> () in
+    print("Fail!")
+})
+
+//Second, Write Trailing Closure of above one
+fetchData(success: { () -> () in
+    print("Success!")
+}) { () -> () in
+    print("Fail!")
+}
+
+//Day 4
+
+func solution(_ clothes:[[String]]) -> Int {
+    var dic = [String:[String]]()
+    for c in clothes{
+        if dic[c[1]] != nil{
+            dic[c[1]]!.append(c[0])
+        }else{
+            dic[c[1]] = [c[0]]
+        }
+    }
+    
+    let count = dic.mapValues{$0.count}.values
+    return count.reduce(1){$0*($1+1)} - 1
+}
+
+print(solution([["yellowhat", "headgear"], ["bluesunglasses", "eyewear"], ["green_turban", "headgear"]]))
+
 
 
