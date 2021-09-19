@@ -1,213 +1,92 @@
 //
 //  main.swift
-//  SwiftStudy1
+//  SwiftBasic
 //
-//  Created by Lee's Pc on 2021/09/04.
+//  Created by Lee's Pc on 2021/09/17.
 //
 
-
-//Day 1
 import Foundation
 
-print("Hello, World!")
-var someAny : Any = 100
-someAny = "아무거나 넣을 수 있다"
-someAny = 123.12
-print(someAny)
-
-var some : Any?
-var someAnyObject : AnyObject?
-
-some = nil
-someAnyObject = nil
-print(some as Any) //as Any 를 하는 이유???
-print(someAnyObject) // 이렇게 하면 Expression implicitly coerced from 'AnyObject?' to 'Any'의 경고 메세지가 나옴.                        이유는?
-
-var numbers : [Int] = [1, 2, 3, 4]
-numbers.append(5)
-numbers.append(contentsOf: [8, 7])
-numbers += [6, 7]
-print(numbers)
-print(numbers.contains(9))
-print(numbers.contains(6))
-numbers.removeLast()
-print(numbers)
-print(numbers.count)
-print(numbers.first)
-print(numbers.last)
-numbers.removeAll()
-print(numbers)
-
-let nums = Array(1...3) //시퀀스 대입 >>> nums라는 이름의 배열에 1부터 3까지 연속적인 값을 대입한다.
-print(nums)
-let nums2 = Array(3...11)
-print(nums2)
-var nums3 = Array(4...9)
-print(nums3)
-// nums2[2] = 7 // 컴파일 오류 발생 >> 이유? nums2 는 변동의 가능성여부가 없는 상수타입으로 설정되었기에 요소의 변경이 불가능하다
-nums3[2] = 7
-print(nums3[2]) // 반면에 이번엔 컴파일 오류가 발생하지 않는다. >> 이유? nums3는 변동의 가능성이 있는 변수 선언 즉, var로 선언 되었기 떄문에 변경이 가능하다.
-let anyArr: [Any] = [1, 2, "three", "four"] //한 배열 안에 여러 타입의 값을 넣고 싶다면 'Any'를 사용하면 된다.
-print(anyArr)
-
-var dic: [String: Int] = ["Lee": 25]
-print(dic["Lee"])
-
-if let result = dic["Lee"] // 옵셔널 바인딩을 통한 값 추출
-{
-    print(result)
+//Day 4 9月16~18日の勉強
+let nums: [[Int]] = [[1, 4], [2, 5], [3, 9], [4, 7, 8]]
+print(nums[0])
+for num in nums {
+    print(num)
+}
+for num in nums {     // num이라는 상수자체에 num[0]이 들어가고 num[1]...이 들어가는 반복문이다. 즉, 여기서num[0]이라고 적으면 num[0][0], num[1][0], num[2][0]...이렇게 반복되는 것이다. 중요!
+    print(num[0])
 }
 
-print(dic["Lee"]!)  //마지막에 느낌표를 붙이는 것은 강제 언래핑이라고 한다.
-
-var set1: Set<Int> = [1, 2, 5, 0]
- 
-// 1. insert : 값을 추가하고, 추가된 결과를 튜플로 리턴 (중복이면 false, 추가된 값)
-print(set1.insert(1))                // (false, 1)
-print(set1)
-print(set1.insert(10))               // (true, 10)
-print(set1)
-
-// 2. update : 값이 존재하지 않으면 추가 후 nil 리턴, 존재할 경우 덮어쓰기 후 덮어쓰기 전 값 리턴
-print(set1.update(with: 1))   // Optioanl(1)
-print(set1)
-print(set1.update(with: 120))        // nil
-print(set1)
-
-//Day 2
-
-func sayHello(name: String)
-{
-    print("Check #2 \(name)")
-}
- 
-var name: String = "Kyusok"
-sayHello(name: name)
-name = "LeeKyusok"
-print("Check #1 \(name)")
-
-func sayHello2(name1: inout String) {
-    name1 = "Kyumaker"
-}
- 
-var name2: String = "LeeKyusok"
-sayHello2(name1: &name2)
-print(name2)
-
-//가변 파라미터
-func printSum(of nums: Int...) {}
-printSum(of: 1, 2, 3, 4)
-
-//파라미터가 있는 함수의 표기법 (Parameter Exists)
-func toYou(name: String) {}
-toYou(name:"LeeKS")
-func toYou1(_ name: String) {}
-toYou1(_ : "Hello")
-func toYou2(to name: String) {}
-toYou2(to: "Good")
-
-//파라미터가 없는 함수의 표기법 (No Parameter)
-func toYou3() {}
-toYou3()
-
-//함수를 상수에 대입
-func funcDainyuu(name: String) {
-    print("\(name)")
-}
-func funcDainyuu(_ name: String) {
-    print("\(name)")
-}
-let f = funcDainyuu(name:)
-f("Lee")
-
-//Day 3
-
-//함수의 파라미터로 함수를 전달할 수 있다.
-//Possbile to send Functions to Parameters of the Function
-func doSomething(_ callback: (String) -> ()) {
-    callback("Kyusok")
-    callback("KyusokLee")
-    callback("LeeKyusok")
-}
- 
-doSomething {message in
-    print("Success!" + message)
+for num in nums {
+    print(num[1])
 }
 
-let closure = { () -> () in
-    print("Closure")
-}
 
-func doSomething1(closure: () -> ()) {
-    closure()
-}
 
-doSomething1(closure: { () -> () in
-    print("Hello!")
-})
+let evenNums = [2,4,6]
+let oddNums = [1,3,5,7]
+let dic : [String:[Int]] = ["even" : evenNums, "odd" : oddNums] //String 과 int배열
+print("\(dic["odd"]!) + 은 강제언래핑") //Forced Unwrapping
+print(dic["odd"] ?? "None") //IOU 암시적추출
 
-//함수의 반환타입으로 클로저를 사용할 수 있다.
-//Closure can be used as the Return Type of the Function.
-func doSomething() -> () -> () {
-    
-    return { () -> () in
-        print("Hello LeeKyusok!")
-    }
-}
+//map and mapValues (in Dictionary)
+//map 이랑 mapValues의 차이점 (Dictionary에서의)
 
-let closure2 = doSomething()
-closure2()
+//map은 배열로 출력시켜준다. 단, map의 뒤에 {$0}만 쓸 경우는, key가 무엇인지, value가 무엇인지 나타내주는 딕셔너리랑 비슷한 꼴의 배열을 출력해준다
+let mapCountries = [
+    "US": "United States",
+    "BE": "Belgium",
+    "CN": "China"
+]
 
-//변수나 상수에 대입없이 클로저를 직접 실행하는 방법
-//Way to execute a Closure without substituting a Variable or a Constant.
-({ () -> () in
-    print("Hello 李!")
-})()
+let intsCount1 = mapCountries.map{$0}
+print(intsCount1)
+// ******** map의 뒤에 {$0}만 쓸 경우는, key가 무엇인지, value가 무엇인지 나타내주는 딕셔너리랑 비슷한 꼴의 배열을 출력해준다*****
+let intsCount2 = mapCountries.map { $0.value.count }
+print(intsCount2)
+// 위의 부연설명: {$0.value.count} 이기에 Value에 해당하는 값의 글자수를 count하여 int값으로 변형시킨후, 배열로 출력시켜준다.
+let ints = mapCountries.map{$0.value}
+print(ints)
+// 위의 부연설명: {$0.value} 자체가 값의 요소들의 값자체를 출력시켜준다. 이 또한, 배열로 출력시켜준다.
 
-//Trailing Closure (클로저 문법 경량화 Simplify the Closure grammar)
-//First, Write an inline Closure
-func doSomething2(closure: () -> ()) {
-    closure()
-}
+// ****** mapValues는 딕셔너리의 값만 변환시키며 배열이 아닌 딕셔너리로 출력시켜준다. ******
+let countries1 = [
+    "US": "United States",
+    "BE": "Belgium",
+    "CN": "China"
+]
 
-doSomething2(closure: { () -> () in
-    print("Hello! World!")
-})
+let ints2 = countries1.mapValues { $0.count }
+print(ints2)
+// mapValues{$0.count}는 key는 그대로 출력시켜주고, 그 key에 해당하는 value를 count해준다. String이기에 글자수를 카운트시켜준다.
 
-//Second, Write Trailing Closure of above one (Simplified Closure grammar)
-doSomething2() { () -> () in
-    print("Hello! World!")
-}
+let countries2: [String:[String]] = [
+    "A": ["Apple", "Amazon", "Amazing"],
+    "B": ["Banana", "Boss"],
+    "C": ["Canada", "Cat", "Cheese", "Coffee"]
+]
 
-//파라미터가 여러 개인 함수일 경우
-//The case of a function which has multiple parameters
-func fetchData(success: () -> (), fail: () -> ()) {
-    success()
-    fail()
-}
+let ints3 = countries2.mapValues{$0.count}
+print(ints3)
+// 여기에서는 딕셔너리가 [String:[String]]이기에 Value에 들어갈 수 있는 것이 요소들의 배열이 되게 된다. 즉, 그 키에 해당하는 값에 있는 요소의 수를 count해서 숫자(int)로 변형시켜준다. 키와 값을 둘다 출력하는 딕셔너리형식으로 반환된다.
+let ints4 = countries2.mapValues{$0.count}.values //mapValues에만 뒤에 .values 가능
+print(ints4)
+// 이 경우에는 위에서의 ints3의 출력에서의 변형으로, 위에서 출력시켰던 딕셔너리에서 .values를 붙여서 값의 count값만을 갖는 배열로 출력시켜준다.
+let ints5 = countries2.mapValues{$0}
+print(ints5)
+// 이 경우에는 그냥 딕셔너리의 출력과도 같다.
+print(countries2)
+// 위의 값과 동일 (딕셔너리의 단순 출력)
 
-//First, write an inline Closure
-fetchData(success: { () -> () in
-    print("Success!")
-}, fail: { () -> () in
-    print("Fail!")
-})
-
-//Second, Write Trailing Closure of above one
-fetchData(success: { () -> () in
-    print("Success!")
-}) { () -> () in
-    print("Fail!")
-}
-
-//Day 4
-
+//Day 5　9月19日の勉強
+//프로그래머스 위장 swift
+//Programmers Disguise (Swift)
 func solution(_ clothes:[[String]]) -> Int {
     var dic = [String:[String]]()
     for c in clothes{
         if dic[c[1]] != nil{
             dic[c[1]]!.append(c[0])
-        }else{
+        } else {
             dic[c[1]] = [c[0]]
         }
     }
@@ -218,5 +97,54 @@ func solution(_ clothes:[[String]]) -> Int {
 
 print(solution([["yellowhat", "headgear"], ["bluesunglasses", "eyewear"], ["green_turban", "headgear"]]))
 
+// 알고리즘 해석
+// print(solution([~~~])에서 clothes[0]은["yellowhat", "headgear"]에 해당
+// func solution 내부에서의 for문의 c라는 상수는 clothes[0]부터 시작하게 됨. 즉, 여기서의 c[1]은 사실은 clothes[0][1]이 들어간다는 뜻!
+// 위의 알고리즘을 그대로 따라가면은, dic을 빈 배열로 초기화해주었기에 아무 요소(키 : 값)가 없는 상황이다.
+// for문이 시작될때, clothes[0][1]부터 시작이 되는데 (c라는 상수자체가 clothes[0] 부터 시작하기에), 그렇게 되면 처음에는 dic[c[1]] 은 nil 이기에 else문을 따라가게 된다.
+// 그렇게되면, 의상의 종류를 키값으로 해당 의상의 종류(이것이 값이 됨)가 담긴 배열을 만들어준다. 즉, ["yellowhat", "headgear"]에서 headgear를 키로하는 배열을 만든다. 이때, headgear를 키값에 yellowhat이 들어가게 된다.
+// 다음으로 for문의 반복에 의해, clothes[1][1]이 대입되어 for문이 실행되는데, eyewear를 키로 하는 딕셔너리가 아직 없는 관계로 else문을 실행 후 eyeswear를 키로 하는 배열을 만든 후, 이 키에 bluesunglasses를 값으로서 대입하게 된다.
+// 다음의 for문 반복은 clothes[2][1]이 대입되어 실행된다. 이때, c[1], 즉 clothes[2][1]은 headgear이다. 좀 전에 위에서 headgear를 키로하는 딕셔너리를 만들었기에, dic[c[1]] 은 존재한다는 것을 알 수 있다. 즉, for문의 if문, dic[c[1]] != nil (해당 딕셔너리가 nil이 아니고 이미 존재하기에) 이 실행된다. 이때, 해당 의상의 종류를 키로 하는 딕셔너리에 해당 배열의 이름이 값으로 추가되게 된다. 그렇기에 [String : [String]]으로 만든것이지.. (의상의 종류는 한정되어도, 의상의 이름은 여러가지가 될 수 있으니)
+// for문은 clothes배열의 종류만큼 진행하기에 이걸로 for문은 종류가 된다. 
 
+let asiaKuni: [String] = ["Korea", "Japan", "China", "Taiwan", "Russia"]
+for i in asiaKuni {
+    print(i)
+}
+
+for j in 0..<asiaKuni.count {
+    print(j)
+    let eastAsia = asiaKuni[j]
+    print(eastAsia)
+}
+
+//프로그래머스 베스트앨범 swift 고득점Kit
+//Programmers BestAlbum (Swift)
+
+func solution(_ genres: [String], _ plays: [Int]) -> [Int] {
+    var genrePlay: [String:Int] = [:]
+    var indexInGenre: [String:[Int]] = [:]
+    
+    for i in 0..<genres.count {
+        let genre = genres[i]
+        let play = plays[i]
+        
+        if let playsCount = genrePlay[genre] {
+            genrePlay[genre] = play + playsCount
+        } else {
+            genrePlay[genre] = play
+        }
+        
+        if indexInGenre[genre] != nil {
+            indexInGenre[genre]!.append(i)
+        } else {
+            indexInGenre[genre] = [i]
+        }
+        
+    }
+    
+    
+    var answer: [Int] = []
+    return answer
+}
 
